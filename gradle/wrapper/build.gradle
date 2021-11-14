@@ -1,0 +1,6 @@
+task reports (type: Copy, dependsOn: ['bake','clonePages']){
+    from "build/docs"
+    into "docs/"
+    from "build/reports/"
+    into "reports/"
+}
