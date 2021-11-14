@@ -1,21 +1,9 @@
 task reports (type: Copy, dependsOn: ['bake', 'clonePages']) {  ➁
     from "build/docs/
     into "docs/"
+    from "build/reports/
+    into "reports/"
 }
 
-task updateGHPages (dependsOn: 'copyReports') {                     ➂
-    group = "Reporting"
-    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
-    doLast {
-        def pagesDir = "$buildDir/gh-pages"
-        def grgit = git.open {
-            dir = pagesDir + "/.git"
-        }
-        grgit.add (update: false, patterns: ['reports/'])
-        grgit.add (update: true, patterns: ['reports/'])
-        grgit.commit {
-            message = "Updating web pages"
-        }
-        grgit.push {}
-    }
+
 }
